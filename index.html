@@ -1,36 +1,96 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <meta charset="UTF-8">
-<title>Kegiatan Harian</title>
+<title>Dashboard Kegiatan Harian</title>
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+<header>
+
+<h2>Dashboard Kegiatan Harian</h2>
+
+</header>
+
 <div class="container">
 
-<h1>Kegiatan Harian</h1>
+<div class="card">
 
-<form id="formKegiatan">
+<h3>Tambah Kegiatan</h3>
 
-<input type="date" id="tanggal" required>
+<input type="date" id="tanggal">
 
-<input type="text" id="kegiatan" placeholder="Nama kegiatan" required>
+<input type="text" id="kegiatan" placeholder="Nama kegiatan">
 
 <input type="text" id="lokasi" placeholder="Lokasi kegiatan">
 
-<textarea id="keterangan" placeholder="Keterangan"></textarea>
-
-<button type="submit">Simpan</button>
-
-</form>
-
-<div id="notif"></div>
+<button onclick="tambahData()">Simpan</button>
 
 </div>
+
+
+
+<div class="grid">
+
+<div class="card">
+
+<div>Total Hari Ini</div>
+<div class="stat" id="today">0</div>
+
+</div>
+
+<div class="card">
+
+<div>Total Minggu Ini</div>
+<div class="stat" id="week">0</div>
+
+</div>
+
+<div class="card">
+
+<div>Total Bulan Ini</div>
+<div class="stat" id="month">0</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Data Kegiatan</h3>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Tanggal</th>
+<th>Kegiatan</th>
+<th>Lokasi</th>
+<th>Aksi</th>
+</tr>
+
+</thead>
+
+<tbody id="tableData"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
