@@ -1,4 +1,4 @@
-const API_URL="https://script.google.com/macros/s/AKfycbxJICpUZxKb48vySU3mP-uo0nvhgzrYsQDHWJe82maDVDNO4EO9O2sH-A_2Zf4iL3bq/exec"
+const API_URL = "https://script.google.com/macros/s/AKfycbzbNhNTm2SALAvJB-j4akXuUzjVzfB6ruz_bOt7M7x43ALoDWKexFfRYlY3t25ES9Gn/exec"
 
 
 
@@ -19,27 +19,47 @@ t.style.display="none"
 
 
 
+// format tanggal
+function formatTanggal(dateString){
+
+let date = new Date(dateString)
+
+let hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"]
+let bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"]
+
+let h = hari[date.getDay()]
+let t = date.getDate()
+let b = bulan[date.getMonth()]
+let y = date.getFullYear()
+
+let jam = date.getHours().toString().padStart(2,'0')
+let menit = date.getMinutes().toString().padStart(2,'0')
+
+return `${h}, ${t} ${b} ${y} ${jam}:${menit}`
+
+}
+
+
+
+// tambah kegiatan
 function tambahData(){
 
 let data={
 
-tanggal:document.getElementById("tanggal").value,
+action:"add",
 kegiatan:document.getElementById("kegiatan").value,
 lokasi:document.getElementById("lokasi").value
 
 }
 
 fetch(API_URL,{
-
 method:"POST",
 body:JSON.stringify(data)
-
 })
 .then(r=>r.json())
 .then(res=>{
 
 toast("Data berhasil disimpan")
-
 loadData()
 
 })
@@ -48,6 +68,7 @@ loadData()
 
 
 
+// load data dari spreadsheet
 function loadData(){
 
 fetch(API_URL)
@@ -79,7 +100,7 @@ table+=`
 
 <tr>
 
-<td>${d.tanggal}</td>
+<td>${formatTanggal(d.tanggal)}</td>
 <td>${d.kegiatan}</td>
 <td>${d.lokasi}</td>
 
@@ -105,18 +126,22 @@ document.getElementById("month").innerText=month
 
 
 
+// hapus data
 function hapus(id){
 
 fetch(API_URL,{
 
-method:"DELETE",
-body:JSON.stringify({id:id})
+method:"POST",
+body:JSON.stringify({
+action:"delete",
+id:id
+})
 
 })
-.then(()=>{
+.then(r=>r.json())
+.then(res=>{
 
 toast("Data dihapus")
-
 loadData()
 
 })
