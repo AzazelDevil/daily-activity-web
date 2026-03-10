@@ -1,9 +1,16 @@
+
 body{
 
-font-family:Segoe UI,Arial;
-background:#f4f6fb;
+font-family:Segoe UI, Arial;
 margin:0;
+padding:0;
 
+background-image:url("https://username.github.io/kegiatan-harian-app/assets/background.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+background-attachment:fixed;
 }
 
 header{
