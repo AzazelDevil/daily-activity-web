@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzbNhNTm2SALAvJB-j4akXuUzjVzfB6ruz_bOt7M7x43ALoDWKexFfRYlY3t25ES9Gn/exec"
+const API_URL = "https://script.google.com/macros/s/AKfycbxdgafxvKkpYV05bq0yV22E3OhHoLNMD3sx53ddAabt-QL7q7Z-QBbEyPObMKeOgnYT/exec"
 
 
 
@@ -10,16 +10,14 @@ t.innerText=msg
 t.style.display="block"
 
 setTimeout(()=>{
-
 t.style.display="none"
-
 },2000)
 
 }
 
 
 
-// format tanggal
+// format tanggal Indonesia
 function formatTanggal(dateString){
 
 let date = new Date(dateString)
@@ -41,12 +39,13 @@ return `${h}, ${t} ${b} ${y} ${jam}:${menit}`
 
 
 
-// tambah kegiatan
+// tambah data kegiatan
 function tambahData(){
 
 let data={
 
 action:"add",
+tanggal:document.getElementById("tanggal").value,
 kegiatan:document.getElementById("kegiatan").value,
 lokasi:document.getElementById("lokasi").value
 
@@ -60,6 +59,7 @@ body:JSON.stringify(data)
 .then(res=>{
 
 toast("Data berhasil disimpan")
+
 loadData()
 
 })
@@ -142,6 +142,7 @@ id:id
 .then(res=>{
 
 toast("Data dihapus")
+
 loadData()
 
 })
